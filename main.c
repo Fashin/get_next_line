@@ -17,7 +17,6 @@ int		main(int argc, char **argv)
 	int		fd;
 	char	*line;
 
-	(void)argc;
 	if (argc != 2)
 	{
 		printf("File name missing\n");
@@ -25,6 +24,13 @@ int		main(int argc, char **argv)
 	}
 	fd = open(argv[1], O_RDONLY);
 	get_next_line(fd, &line);
+	printf("%s", line);
+	get_next_line(fd, &line);
+	printf("%s", line);
+	get_next_line(fd, &line);
+	printf("%s", line);
+	get_next_line(fd, &line);
+	printf("%s", line);
 	close(fd);
 	return (0);
 }

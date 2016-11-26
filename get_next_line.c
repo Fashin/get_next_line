@@ -12,21 +12,55 @@
 
 #include "get_next_line.h"
 
-int		get_next_line(const int fd, char **line)
+char	*ft_realloc_gnl(char *ptr, size_t size)
 {
-	static char		*curr_line;
-	char			*tmp;
+	char	*tmp;
+	size_t 	i;
 
-	curr_line = ft_memalloc(BUFF_SIZE);
-	while (read(fd, curr_line, BUFF_SIZE) > 0)
-		tmp = ft_strjoin(tmp, curr_line);
-	if (!(*line = (char *)malloc(ft_strlen(tmp))))
-		return (-1);
-	*line = tmp;
-	while (**line != '\0' && **line != '\n')
+	tmp = ptr;
+	i = 0;
+	if (!(ptr = (char *)malloc(size)))
+		return (NULL);
+	while(i < size)
 	{
-		write(1, *line, 1);
-		*line += 1;
+		ptr[i] = tmp[i];
+		i++;
 	}
+	return (ptr);
+}
+
+int			get_next_line(const int fd, char **line)
+{
+	static char	*curr_line;
+	char		*tmp;
+	int			i;
+	int			pos;
+
+	pos = 0;
+	if (!curr_line)
+	{
+		if (!(curr_line = (char *)malloc(BUFF_SIZE)))
+			return (-1);
+	}
+	if (!(tmp = (char *)malloc(BUFF_SIZE)))
+		return (-1);
+	while (read(fd, curr_line, BUFF_SIZE) > 0)
+	{
+		i = 0;
+		while (i < BUFF_SIZE)
+		{
+			tmp[i + (BUFF_SIZE * pos)] = curr_line[i];
+			if (curr_line[i] == '\n')
+			{
+				curr_line = curr_line + i + 1;
+				*line = tmp;
+				return (1);
+			}
+			i++;
+		}
+		pos++;
+		tmp = ft_realloc_gnl(tmp, BUFF_SIZE * (pos + 1));
+	}
+	*line = tmp;
 	return (0);
 }

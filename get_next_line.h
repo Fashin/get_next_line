@@ -12,7 +12,7 @@
 
 #ifndef __GET_NEXT_LINE_H
 # define __GET_NEXT_LINE_H
-# define BUFF_SIZE 10
+# define BUFF_SIZE 1
 #include "libft/libft.h"
 #include <unistd.h>
 #include <fcntl.h>
@@ -20,5 +20,5 @@
 #include <stdio.h>
 
 int		get_next_line(const int fd, char **line);
-char	*ft_stock(char *curr_line, char *line, int pos);
+char	*ft_realloc_gnl(char *ptr, size_t size);
 #endif
