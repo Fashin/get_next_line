@@ -24,7 +24,6 @@ typedef struct			s_list
 }						t_list;
 
 int						ft_atoi(const char *str);
-char					*ft_realloc(char *str, int size);
 void					ft_bzero(void *s, size_t n);
 int						ft_isalnum(int c);
 int						ft_isalpha(int c);
@@ -32,6 +31,7 @@ int						ft_isascii(int c);
 int						ft_isdigit(int c);
 int						ft_isprint(int c);
 char					*ft_itoa(int n);
+char					*ft_realloc(char *ptr, size_t size);
 void					*ft_memalloc(size_t size);
 void					*ft_memccpy(void *dst, const void *src, int c,
 						size_t n);

@@ -15,44 +15,18 @@
 int		get_next_line(const int fd, char **line)
 {
 	static char		*curr_line;
-	int				i;
-	int				pos;
+	char			*tmp;
 
-	i = 0;
-	pos = 1;
-	ft_memdel((void **)line);
-	if (!(curr_line = (char *)malloc(BUFF_SIZE)))
-		return (-1);
+	curr_line = ft_memalloc(BUFF_SIZE);
 	while (read(fd, curr_line, BUFF_SIZE) > 0)
+		tmp = ft_strjoin(tmp, curr_line);
+	if (!(*line = (char *)malloc(ft_strlen(tmp))))
+		return (-1);
+	*line = tmp;
+	while (**line != '\0' && **line != '\n')
 	{
-		while (i < BUFF_SIZE)
-		{
-			if (curr_line[i] == '\n')
-				return (1);
-			write(1, &curr_line[i], 1);
-			i++;
-		}
-		i = 0;
-		pos++;
-		if (pos != 2)
-			*line = ft_realloc(*line, BUFF_SIZE * pos);
-		*line = ft_strcat(*line, curr_line);
+		write(1, *line, 1);
+		*line += 1;
 	}
 	return (0);
 }
-
-/*
-ret = curr_line;
-		while (i < BUFF_SIZE)
-		{
-			if (ret[i] == '\n')
-				return (1);
-			write(1, &ret[i], 1);
-			i++;
-		}
-		i = 0;
-		pos++;
-
-		*line = ft_realloc(*line, BUFF_SIZE * pos);
-		*line = ft_strcat(*line, ret);
-*/
