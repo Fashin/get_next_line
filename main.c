@@ -3,34 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arlecomt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: arlecomt <arlecomt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/24 15:06:00 by arlecomt          #+#    #+#             */
-/*   Updated: 2016/11/24 15:10:39 by arlecomt         ###   ########.fr       */
+/*   Created: 2016/12/01 15:27:52 by arlecomt          #+#    #+#             */
+/*   Updated: 2016/12/01 15:27:53 by arlecomt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	int		fd;
+	int		fd_2;
 	char	*line;
 
-	if (argc != 2)
-	{
-		printf("File name missing\n");
-		exit(0);
-	}
+	(void)argc;
 	fd = open(argv[1], O_RDONLY);
+	fd_2 = open(argv[2], O_RDONLY);
 	get_next_line(fd, &line);
-	printf("%s", line);
+	printf("%s\n", line);
 	get_next_line(fd, &line);
-	printf("%s", line);
+	printf("%s\n", line);
+	get_next_line(fd_2, &line);
+	printf("%s\n", line);
 	get_next_line(fd, &line);
-	printf("%s", line);
+	printf("%s\n", line);
 	get_next_line(fd, &line);
-	printf("%s", line);
-	close(fd);
+	printf("%s\n", line);
+	get_next_line(fd, &line);
+	printf("%s\n", line);
 	return (0);
 }

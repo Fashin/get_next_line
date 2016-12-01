@@ -12,13 +12,20 @@
 
 #ifndef __GET_NEXT_LINE_H
 # define __GET_NEXT_LINE_H
-# define BUFF_SIZE 1
+# define BUFF_SIZE 10
 #include "libft/libft.h"
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-int		get_next_line(const int fd, char **line);
-char	*ft_realloc_gnl(char *ptr, size_t size);
+typedef struct		s_lst
+{
+	int				fd;
+	char			*curr_line;
+	struct s_lst	*next;
+}					t_lst;
+
+int				get_next_line(const int fd, char **line);
+char			*ft_realloc_gnl(char *ptr, size_t size);
 #endif
